@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import ApplicationForms
 from .models import Form
 from django.contrib import messages
+from django.core.mail import EmailMessage
 
 """def index(request):
     if request.method == 'POST':
@@ -31,6 +32,10 @@ def index(request):
             occupation = form.cleaned_data['occupation']
             Form.objects.create(first_name=first_name, last_name=last_name,
                                 emails=email, date=date, occupation=occupation)
+            message_body = f'Your application submitted. Thanks {first_name}'
+            email_message = EmailMessage('Job Application submitted',
+                                 message_body, to=[email])
+            email_message.send()
             messages.success(request, 'Form Submitted Successfully!')
             print("Form data:", first_name, last_name, email, date, occupation)
     return render(request, 'index.html')

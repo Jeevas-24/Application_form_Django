@@ -39,3 +39,6 @@ def index(request):
             messages.success(request, 'Form Submitted Successfully!')
             print("Form data:", first_name, last_name, email, date, occupation)
     return render(request, 'index.html')
+
+def about(request):
+    return render(request, 'about.html')
